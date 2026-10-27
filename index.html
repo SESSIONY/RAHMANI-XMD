@@ -2,333 +2,367 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚡ RAHMANI-XMD | Pairing Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>⚡ RAHMANI-XMD | Secure Pairing</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* ----- global reset & base ----- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     }
 
     body {
-      min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      background: #09090b; /* Nyeusi sana */
-      color: #f4f4f5;
-      overflow-x: hidden;
-      padding: 1.5rem;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #050505;
+      /* Mwanga hafifu wa Dhahabu chini ya ukurasa */
+      background-image: radial-gradient(circle at 50% 100%, rgba(255, 215, 0, 0.15) 0%, transparent 60%);
+      color: #ffffff;
+      padding: 20px;
     }
 
-    /* ----- dynamic background (video + gradient orbs) ----- */
-    #bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -3;
-      opacity: 0.2;
-      filter: saturate(1.2) contrast(1.1);
-    }
-
-    .bg-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.25;
-      z-index: -2;
-      pointer-events: none;
-    }
-    /* Rangi za Dhahabu na Zawadi */
-    .orb1 { width: 70vw; height: 70vw; top: -20vw; left: -20vw; background: radial-gradient(circle, #FFD700, #B8860B); }
-    .orb2 { width: 60vw; height: 60vw; bottom: -25vw; right: -15vw; background: radial-gradient(circle, #DAA520, #8B6508); }
-    .orb3 { width: 50vw; height: 50vw; top: 40%; left: 30%; background: radial-gradient(circle, #F0E68C, #BDB76B); opacity: 0.15; }
-
-    .overlay-grid {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(50, 40, 20, 0.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(50, 40, 20, 0.4) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* ----- main card (glass) ----- */
+    /* Main Container */
     .container {
       position: relative;
-      z-index: 2;
       width: 100%;
-      max-width: 1280px;
-      padding: 2.5rem 2.8rem;
-      border-radius: 3.5rem;
-      background: rgba(15, 15, 18, 0.65);
-      backdrop-filter: blur(18px) saturate(1.8);
-      -webkit-backdrop-filter: blur(18px) saturate(1.8);
-      border: 1px solid rgba(255, 215, 0, 0.15); /* Dhahabu */
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 215, 0, 0.1) inset;
-      transition: box-shadow 0.4s ease;
-    }
-    .container:hover {
-      box-shadow: 0 40px 100px rgba(200, 160, 0, 0.2), 0 0 0 1px rgba(255, 215, 0, 0.3) inset;
+      max-width: 420px;
+      padding: 35px 25px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(25, 25, 25, 0.9), rgba(10, 10, 10, 0.9));
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 
+                  0 0 0 1px rgba(255, 215, 0, 0.2) inset,
+                  0 0 30px rgba(255, 215, 0, 0.05);
+      backdrop-filter: blur(10px);
     }
 
-    /* ----- header ----- */
+    /* Header Section */
     .header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 30px;
     }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #FFD700, #B8860B);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
     .header h1 {
-      font-size: 3.8rem;
+      font-size: 1.8rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #FFF8DC 0%, #FFD700 40%, #DAA520 80%, #B8860B 100%);
+      background: linear-gradient(90deg, #FFD700, #FFA500);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
-      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
     }
-    .header .sub {
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: #e0d0a0;
-      letter-spacing: 0.3px;
-      background: rgba(30, 25, 10, 0.5);
+
+    .header .subtitle {
       display: inline-block;
-      padding: 0.3rem 1.8rem;
-      border-radius: 60px;
-      backdrop-filter: blur(4px);
+      font-size: 0.8rem;
+      color: #a09070;
+      background: rgba(255, 215, 0, 0.1);
+      padding: 5px 15px;
+      border-radius: 20px;
       border: 1px solid rgba(255, 215, 0, 0.2);
     }
 
-    /* ----- info cards ----- */
-    .info-cards {
+    /* Input Fields */
+    .input-group {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-    .card {
-      flex: 1 1 200px;
-      min-width: 170px;
-      background: rgba(25, 20, 10, 0.6);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 215, 0, 0.15);
-      border-radius: 2.2rem;
-      padding: 1.2rem 1.8rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      transition: all 0.25s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 215, 0, 0.5);
-      background: rgba(40, 30, 15, 0.8);
-    }
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      background: linear-gradient(145deg, #B8860B, #8B6508);
-      color: #FFF8DC;
-      flex-shrink: 0;
-    }
-    .card-content h3 {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #c0b080;
-      margin-bottom: 0.15rem;
-    }
-    .card-content p {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.01em;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
     }
 
-    /* ----- button grid ----- */
-    .buttons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1.2rem;
-      margin-top: 1.5rem;
-    }
-    .btn {
+    .input-box {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 1rem 1.5rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      padding: 0 15px;
+      transition: 0.3s;
+    }
+
+    .input-box:focus-within {
+      border-color: #FFD700;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .input-box i {
+      color: #FFD700;
+      font-size: 1.2rem;
+    }
+
+    .input-box select, 
+    .input-box input {
+      width: 100%;
+      padding: 16px 10px;
+      background: transparent;
       border: none;
-      border-radius: 60px;
-      font-weight: 600;
+      color: #fff;
       font-size: 0.95rem;
-      background: rgba(30, 25, 15, 0.6);
-      color: #f0e6c0;
-      border: 1px solid rgba(255, 215, 0, 0.2);
+      outline: none;
+    }
+
+    .input-box select option {
+      background: #111;
+    }
+
+    /* Generate Button */
+    .btn-generate {
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #DAA520, #B8860B);
+      color: #000;
+      font-weight: 800;
+      font-size: 1rem;
+      border: none;
       cursor: pointer;
-      transition: all 0.25s ease;
-      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
     }
-    .btn i { font-size: 1.2rem; color: #FFD700; }
-    .btn:hover {
-      transform: translateY(-5px) scale(1.02);
-      background: rgba(80, 60, 20, 0.5);
-      border-color: #FFD700;
-      color: white;
-      box-shadow: 0 10px 20px -5px rgba(255, 215, 0, 0.3);
-    }
-    .btn:active { transform: scale(0.97); }
 
-    .btn-primary {
-      background: linear-gradient(145deg, #B8860B, #8B6508);
-      border-color: #FFD700;
-      color: white;
-    }
-    .btn-primary i { color: #FFF8DC; }
-
-    /* ----- footer ----- */
-    .footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 215, 0, 0.1);
-      color: #a09060;
-      font-size: 0.85rem;
-    }
-    .footer span {
+    .btn-generate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
       background: linear-gradient(135deg, #FFD700, #DAA520);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 600;
     }
 
-    /* ----- responsiveness ----- */
-    @media (max-width: 700px) {
-      .container { padding: 1.8rem 1.2rem; border-radius: 2rem; }
-      .header h1 { font-size: 2.6rem; }
-      .card { min-width: 140px; padding: 1rem 1.2rem; }
+    /* Result Card (Inatokea tu ukisha-pata code) */
+    .result-card {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 215, 0, 0.05);
+      border: 1px dashed rgba(255, 215, 0, 0.5);
+      border-radius: 15px;
+      text-align: center;
+      animation: slideUp 0.4s ease-out;
     }
-    @media (max-width: 480px) {
-      .header h1 { font-size: 2rem; }
-      .info-cards { gap: 0.8rem; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+
+    .result-card p {
+      font-size: 0.75rem;
+      color: #a09070;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .result-card .code-text {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #FFD700;
+      letter-spacing: 4px;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+
+    .btn-copy {
+      background: transparent;
+      border: none;
+      color: #FFD700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-links a {
+      color: #666;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #FFD700;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.65rem;
+      color: #444;
+      margin-top: 20px;
+      letter-spacing: 1px;
+    }
+    
+    /* Notification */
+    .toast {
+      position: fixed;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FFD700;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    }
+    .toast.show { bottom: 30px; }
+
   </style>
 </head>
 <body>
 
-  <!-- video background -->
-  <video id="bg-video" autoplay muted loop playsinline>
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-waves-9885-large.mp4" type="video/mp4">
-  </video>
-
-  <!-- ambient orbs -->
-  <div class="bg-orb orb1"></div>
-  <div class="bg-orb orb2"></div>
-  <div class="bg-orb orb3"></div>
-  <div class="overlay-grid"></div>
-
-  <!-- main container -->
   <div class="container">
-
-    <!-- header -->
+    
     <div class="header">
-      <h1>⚡ RAHMANI-XMD</h1>
-      <div class="sub"><i class="fas fa-code" style="margin-right: 10px; opacity:0.7;"></i> Session Generator · Pairing</div>
+      <div class="avatar">
+        <img src="https://files.catbox.moe/aktbgo.jpg" alt="RAHMANI-XMD">
+      </div>
+      <h1>RAHMANI-XMD</h1>
+      <div class="subtitle">Coded by Qartde</div>
     </div>
 
-    <!-- system / dev stats cards -->
-    <div class="info-cards">
-      <div class="card">
-        <div class="card-icon"><i class="fas fa-microchip"></i></div>
-        <div class="card-content">
-          <h3>Status</h3>
-          <p>🟢 Online</p>
-        </div>
+    <div class="input-group">
+      <div class="input-box">
+        <i class="fas fa-globe"></i>
+        <select id="country">
+          <option value="255" selected>Tanzania (+255)</option>
+          <option value="254">Kenya (+254)</option>
+          <option value="256">Uganda (+256)</option>
+          <option value="250">Rwanda (+250)</option>
+          <option value="243">DRC (+243)</option>
+          <option value="27">South Africa (+27)</option>
+          <option value="234">Nigeria (+234)</option>
+          <option value="44">UK (+44)</option>
+          <option value="1">USA (+1)</option>
+        </select>
       </div>
-      <div class="card">
-        <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
-        <div class="card-content">
-          <h3>Security</h3>
-          <p>Encrypted</p>
-        </div>
+
+      <div class="input-box">
+        <i class="fas fa-phone-alt"></i>
+        <input type="tel" id="number" placeholder="Enter WhatsApp Number" autocomplete="off">
       </div>
-      <div class="card">
-        <div class="card-icon"><i class="fas fa-bolt"></i></div>
-        <div class="card-content">
-          <h3>Speed</h3>
-          <p>Fast</p>
-        </div>
-      </div>
+
+      <button id="submit" class="btn-generate">
+        <i class="fas fa-bolt"></i> Generate Pair Code
+      </button>
     </div>
 
-    <!-- developer action buttons -->
-    <div class="buttons-grid">
-      
-      <!-- Pair Session Button (Muhimu) -->
-      <button onclick="window.open('/pair')" class="btn btn-primary">
-        <i class="fas fa-link"></i> Generate Pair Code
+    <!-- Result Card (Imefichwa mwanzo) -->
+    <div class="result-card" id="resultCard">
+      <p>Your Pair Code</p>
+      <div class="code-text" id="codeText">------</div>
+      <button class="btn-copy" onclick="copyCode()">
+        <i class="fas fa-copy"></i> Tap to copy
       </button>
-
-      <button onclick="window.open('https://github.com/Qartde/RAHMANI-XMD')" class="btn">
-        <i class="fab fa-github"></i> Bot Repo
-      </button>
-
-      <button onclick="window.open('https://wa.me/255693629079')" class="btn">
-        <i class="fab fa-whatsapp"></i> Contact Owner
-      </button>
-
-      <button onclick="window.open('https://dashboard.heroku.com/new?template=https://github.com/Qartde/RAHMANI-XMD')" class="btn btn-primary">
-        <i class="fas fa-cloud-upload-alt"></i> Heroku Deploy
-      </button>
-
-      <button onclick="window.open('https://whatsapp.com/channel/0029VatokI45EjxufALmY32X')" class="btn">
-        <i class="fab fa-whatsapp-square"></i> WhatsApp Channel
-      </button>
-
-      <!-- Docs Button -->
-      <button onclick="window.open('https://github.com/Qartde/RAHMANI-XMD/blob/main/README.md')" class="btn">
-        <i class="fas fa-book"></i> Read Docs
-      </button>
-
     </div>
 
-    <!-- footer -->
-    <div class="footer">
-      <span>⚡ RAHMANI-XMD</span> · built by <span>Qartde</span> · 2026
+    <div class="footer-links">
+      <a href="https://whatsapp.com/channel/0029VatokI45EjxufALmY32X" target="_blank" title="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://wa.me/255693629079" target="_blank" title="Contact Owner"><i class="fas fa-user-shield"></i></a>
+      <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank" title="GitHub Repo"><i class="fab fa-github"></i></a>
+    </div>
+
+    <div class="copyright">
+      SECURE SYSTEM • 2026
     </div>
   </div>
 
-  <script>
-    (function() {
-      // (optional) style tweak: add a subtle glow to the container on load
-      const container = document.querySelector('.container');
-      setTimeout(() => {
-        container.style.transition = 'box-shadow 1.2s ease';
-        container.style.boxShadow = '0 40px 100px rgba(255, 215, 0, 0.15), 0 0 0 1px rgba(255, 215, 0, 0.2) inset';
-      }, 100);
-    })();
-  </script>
+  <div class="toast" id="toast">Code copied!</div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    const submitBtn = document.getElementById("submit");
+    const numberInput = document.getElementById("number");
+    const countrySelect = document.getElementById("country");
+    const resultCard = document.getElementById("resultCard");
+    const codeText = document.getElementById("codeText");
+    const toast = document.getElementById("toast");
+    let currentCode = "";
+
+    // Copy Function
+    function copyCode() {
+      if (!currentCode) return;
+      navigator.clipboard.writeText(currentCode).then(() => {
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      });
+    }
+
+    // Generate Code Function
+    submitBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      
+      let num = numberInput.value.replace(/\D/g, "");
+      if (!num) {
+        return alert("Please enter a valid phone number!");
+      }
+
+      const countryCode = countrySelect.value;
+      const fullNumber = countryCode + num;
+
+      // Change button state
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+      submitBtn.disabled = true;
+      resultCard.style.display = "none"; // Ficha kadi ya zamani
+
+      try {
+        const { data } = await axios(`/code?number=${fullNumber}`);
+        
+        if (data.code && !data.code.includes("Unavailable")) {
+          currentCode = data.code;
+          codeText.innerText = data.code;
+          resultCard.style.display = "block"; // Onyesha kadi mpya
+        } else {
+          alert("Failed to get code. Server unavailable.");
+        }
+      } catch (err) {
+        alert("Error connecting to server. Try again.");
+      } finally {
+        // Rudisha button kwenye hali yake ya kawaida
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
