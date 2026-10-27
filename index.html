@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ RAHMANI-XMD | Pairing Site</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ----- global reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #09090b; /* Nyeusi sana */
+      color: #f4f4f5;
+      overflow-x: hidden;
+      padding: 1.5rem;
+    }
+
+    /* ----- dynamic background (video + gradient orbs) ----- */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -3;
+      opacity: 0.2;
+      filter: saturate(1.2) contrast(1.1);
+    }
+
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.25;
+      z-index: -2;
+      pointer-events: none;
+    }
+    /* Rangi za Dhahabu na Zawadi */
+    .orb1 { width: 70vw; height: 70vw; top: -20vw; left: -20vw; background: radial-gradient(circle, #FFD700, #B8860B); }
+    .orb2 { width: 60vw; height: 60vw; bottom: -25vw; right: -15vw; background: radial-gradient(circle, #DAA520, #8B6508); }
+    .orb3 { width: 50vw; height: 50vw; top: 40%; left: 30%; background: radial-gradient(circle, #F0E68C, #BDB76B); opacity: 0.15; }
+
+    .overlay-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(50, 40, 20, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(50, 40, 20, 0.4) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ----- main card (glass) ----- */
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      padding: 2.5rem 2.8rem;
+      border-radius: 3.5rem;
+      background: rgba(15, 15, 18, 0.65);
+      backdrop-filter: blur(18px) saturate(1.8);
+      -webkit-backdrop-filter: blur(18px) saturate(1.8);
+      border: 1px solid rgba(255, 215, 0, 0.15); /* Dhahabu */
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 215, 0, 0.1) inset;
+      transition: box-shadow 0.4s ease;
+    }
+    .container:hover {
+      box-shadow: 0 40px 100px rgba(200, 160, 0, 0.2), 0 0 0 1px rgba(255, 215, 0, 0.3) inset;
+    }
+
+    /* ----- header ----- */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .header h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFF8DC 0%, #FFD700 40%, #DAA520 80%, #B8860B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+      margin-bottom: 0.5rem;
+    }
+    .header .sub {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e0d0a0;
+      letter-spacing: 0.3px;
+      background: rgba(30, 25, 10, 0.5);
+      display: inline-block;
+      padding: 0.3rem 1.8rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    /* ----- info cards ----- */
+    .info-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .card {
+      flex: 1 1 200px;
+      min-width: 170px;
+      background: rgba(25, 20, 10, 0.6);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 215, 0, 0.15);
+      border-radius: 2.2rem;
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 215, 0, 0.5);
+      background: rgba(40, 30, 15, 0.8);
+    }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: linear-gradient(145deg, #B8860B, #8B6508);
+      color: #FFF8DC;
+      flex-shrink: 0;
+    }
+    .card-content h3 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #c0b080;
+      margin-bottom: 0.15rem;
+    }
+    .card-content p {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    /* ----- button grid ----- */
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: rgba(30, 25, 15, 0.6);
+      color: #f0e6c0;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .btn i { font-size: 1.2rem; color: #FFD700; }
+    .btn:hover {
+      transform: translateY(-5px) scale(1.02);
+      background: rgba(80, 60, 20, 0.5);
+      border-color: #FFD700;
+      color: white;
+      box-shadow: 0 10px 20px -5px rgba(255, 215, 0, 0.3);
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: linear-gradient(145deg, #B8860B, #8B6508);
+      border-color: #FFD700;
+      color: white;
+    }
+    .btn-primary i { color: #FFF8DC; }
+
+    /* ----- footer ----- */
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 215, 0, 0.1);
+      color: #a09060;
+      font-size: 0.85rem;
+    }
+    .footer span {
+      background: linear-gradient(135deg, #FFD700, #DAA520);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+
+    /* ----- responsiveness ----- */
+    @media (max-width: 700px) {
+      .container { padding: 1.8rem 1.2rem; border-radius: 2rem; }
+      .header h1 { font-size: 2.6rem; }
+      .card { min-width: 140px; padding: 1rem 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .header h1 { font-size: 2rem; }
+      .info-cards { gap: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- video background -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-waves-9885-large.mp4" type="video/mp4">
+  </video>
+
+  <!-- ambient orbs -->
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+  <div class="overlay-grid"></div>
+
+  <!-- main container -->
+  <div class="container">
+
+    <!-- header -->
+    <div class="header">
+      <h1>⚡ RAHMANI-XMD</h1>
+      <div class="sub"><i class="fas fa-code" style="margin-right: 10px; opacity:0.7;"></i> Session Generator · Pairing</div>
+    </div>
+
+    <!-- system / dev stats cards -->
+    <div class="info-cards">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-microchip"></i></div>
+        <div class="card-content">
+          <h3>Status</h3>
+          <p>🟢 Online</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="card-content">
+          <h3>Security</h3>
+          <p>Encrypted</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-bolt"></i></div>
+        <div class="card-content">
+          <h3>Speed</h3>
+          <p>Fast</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- developer action buttons -->
+    <div class="buttons-grid">
+      
+      <!-- Pair Session Button (Muhimu) -->
+      <button onclick="window.open('/pair')" class="btn btn-primary">
+        <i class="fas fa-link"></i> Generate Pair Code
+      </button>
+
+      <button onclick="window.open('https://github.com/Qartde/RAHMANI-XMD')" class="btn">
+        <i class="fab fa-github"></i> Bot Repo
+      </button>
+
+      <button onclick="window.open('https://wa.me/255693629079')" class="btn">
+        <i class="fab fa-whatsapp"></i> Contact Owner
+      </button>
+
+      <button onclick="window.open('https://dashboard.heroku.com/new?template=https://github.com/Qartde/RAHMANI-XMD')" class="btn btn-primary">
+        <i class="fas fa-cloud-upload-alt"></i> Heroku Deploy
+      </button>
+
+      <button onclick="window.open('https://whatsapp.com/channel/0029VatokI45EjxufALmY32X')" class="btn">
+        <i class="fab fa-whatsapp-square"></i> WhatsApp Channel
+      </button>
+
+      <!-- Docs Button -->
+      <button onclick="window.open('https://github.com/Qartde/RAHMANI-XMD/blob/main/README.md')" class="btn">
+        <i class="fas fa-book"></i> Read Docs
+      </button>
+
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+      <span>⚡ RAHMANI-XMD</span> · built by <span>Qartde</span> · 2026
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // (optional) style tweak: add a subtle glow to the container on load
+      const container = document.querySelector('.container');
+      setTimeout(() => {
+        container.style.transition = 'box-shadow 1.2s ease';
+        container.style.boxShadow = '0 40px 100px rgba(255, 215, 0, 0.15), 0 0 0 1px rgba(255, 215, 0, 0.2) inset';
+      }, 100);
+    })();
+  </script>
+
+</body>
+</html>
