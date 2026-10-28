@@ -1,18 +1,29 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
- 
-# Other files and folders
-.settings/
+# Node.js Dependencies (Hizi hazipaswi kupanda GitHub)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Session Files (Hizi ni za siri, zina namba yako!)
+scan/
+session/
+auth_info/
+temp/
+*.json.bak
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Environment Variables (Hizi zina API Keys zako)
+.env
+.env.local
+
+# Media Files (Picha/GIFs zinazotumika mara kwa mara)
+media/*.webp
+st.webp
+st1.webp
+
+# Mac & Windows System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
