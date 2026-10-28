@@ -1,26 +1,57 @@
 const express = require('express');
 const app = express();
-__path = process.cwd()
+const path = require('path');
 const bodyParser = require("body-parser");
+
 const PORT = process.env.PORT || 8000;
-let server = require('./qr'),
-    code = require('./pair');
-require('events').EventEmitter.defaultMaxListeners = 500;
-app.use('/qr', server);
-app.use('/code', code);
-app.use('/pair',async (req, res, next) => {
-res.sendFile(__path + '/pair.html')
-})
-app.use('/',async (req, res, next) => {
-res.sendFile(__path + '/index.html')
-})
+
+// ═══════════════════════════════════════════
+//   🛡️ MIDDLEWARE (Zima kuwekwa kwanza)
+// ═══════════════════════════════════════════
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+require('events').EventEmitter.defaultMaxListeners = 500;
+
+// Serve static files (CSS, JS, Images zote zilizopo kwenye folda)
+app.use(express.static(__dirname));
+
+// ═══════════════════════════════════════════
+//   📱 ROUTES
+// ═══════════════════════════════════════════
+const qrRouter = require('./qr');
+const pairRouter = require('./pair');
+
+app.use('/qr', qrRouter);
+app.use('/code', pairRouter);
+
+// Pair Page
+app.get('/pair', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pair.html'));
+});
+
+// Home Page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// ═══════════════════════════════════════════
+//   🚀 START SERVER
+// ═══════════════════════════════════════════
 app.listen(PORT, () => {
     console.log(`
-Topu-Qr-Scanner is Live
+╔══════════════════════════════════════════╗
+║   ⚡ RAHMANI-XMD PAIRING SERVER ⚡       ║
+╚══════════════════════════════════════════╝
 
- Server running on http://localhost:` + PORT)
-})
+🚀 Server is running on port: ${PORT}
+🌐 Local URL: http://localhost:${PORT}
+📱 Pair Page: /pair
+🔑 Pair API: /code
+📷 QR API: /qr
+🏠 Home: /
 
-module.exports = app
+✅ Ready to receive requests!
+`);
+});
+
+module.exports = app;
