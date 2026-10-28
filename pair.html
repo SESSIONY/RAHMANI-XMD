@@ -18,73 +18,125 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background-color: #050505; /* Nyeusi */
-      /* Mwanga hafifu wa Dhahabu chini ya ukurasa */
-      background-image: radial-gradient(circle at 50% 100%, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
+      background-color: #000000; /* Nyeusi tupu */
       color: #ffffff;
       padding: 20px;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
-    /* Main Container */
+    /* Mwanga wa Dhahabu Unaoenda Mviringo (Background) */
+    .bg-glow {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+      animation: pulseGlow 4s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+      100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    }
+
+    /* Kadi Kuu */
     .container {
       position: relative;
+      z-index: 2;
       width: 100%;
-      max-width: 420px;
-      padding: 35px 25px;
+      max-width: 400px;
+      padding: 40px 30px;
       border-radius: 24px;
-      background: linear-gradient(145deg, rgba(25, 25, 25, 0.95), rgba(10, 10, 10, 0.95));
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 
-                  0 0 0 1px rgba(255, 215, 0, 0.15) inset,
-                  0 0 30px rgba(255, 215, 0, 0.05);
-      backdrop-filter: blur(10px);
-      z-index: 10;
+      background: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.1), inset 0 0 20px rgba(255, 215, 0, 0.05);
     }
 
-    /* Header Section */
+    /* Header & Picha Inayozunguka */
     .header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
-    .avatar {
+    .avatar-spin {
       width: 110px;
       height: 110px;
-      margin: 0 auto 15px;
+      margin: 0 auto 20px;
       border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, #FFD700, #B8860B);
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .avatar img {
+    /* Mstari wa Nje UnaoZunguka */
+    .avatar-spin::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #FFD700;
+      border-right-color: #FFA500;
+      animation: spinBorder 3s linear infinite;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+    /* Mstari wa Pili UnaoZunguka Kinyume */
+    .avatar-spin::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-bottom-color: #FFD700;
+      border-left-color: #B8860B;
+      animation: spinBorderReverse 4s linear infinite;
+    }
+
+    @keyframes spinBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes spinBorderReverse {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .avatar-spin img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
+      border: 3px solid #000;
+      position: relative;
+      z-index: 1;
     }
 
     .header h1 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 800;
-      background: linear-gradient(90deg, #FFD700, #FFA500);
+      background: linear-gradient(90deg, #FFD700, #FFA500, #FFF8DC);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       margin-bottom: 5px;
     }
 
-    .header .subtitle {
-      display: inline-block;
-      font-size: 0.8rem;
-      color: #a09070;
-      background: rgba(255, 215, 0, 0.1);
-      padding: 5px 15px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 215, 0, 0.2);
+    .header p {
+      font-size: 0.85rem;
+      color: #888;
+      letter-spacing: 1px;
     }
 
-    /* Input Fields */
+    /* Inputs */
     .input-group {
       display: flex;
       flex-direction: column;
@@ -95,7 +147,7 @@
     .input-box {
       display: flex;
       align-items: center;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 12px;
       border: 1px solid rgba(255, 215, 0, 0.2);
       padding: 0 15px;
@@ -105,11 +157,12 @@
     .input-box:focus-within {
       border-color: #FFD700;
       box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+      background: rgba(20, 15, 0, 0.8);
     }
 
     .input-box i {
       color: #FFD700;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     .input-box select, 
@@ -127,52 +180,52 @@
       background: #111;
     }
 
-    /* Generate Button */
-    .btn-generate {
+    /* Kitufe */
+    .submit-btn {
       width: 100%;
       padding: 16px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #DAA520, #B8860B);
+      background: linear-gradient(135deg, #FFD700, #B8860B);
       color: #000;
       font-weight: 800;
       font-size: 1rem;
       border: none;
       cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
       transition: 0.3s;
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
     }
 
-    .btn-generate:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-      background: linear-gradient(135deg, #FFD700, #DAA520);
+    .submit-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      background: linear-gradient(135deg, #FFF8DC, #FFD700);
     }
 
-    .btn-generate:disabled {
-      opacity: 0.7;
+    .submit-btn:disabled {
+      opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
-    /* Result Card (Kadi ya Code Inayotokea chini) */
+    /* Kadi ya Code */
     .result-card {
       display: none;
       margin-top: 20px;
       padding: 20px;
       background: rgba(255, 215, 0, 0.05);
       border: 1px dashed rgba(255, 215, 0, 0.5);
-      border-radius: 15px;
+      border-radius: 12px;
       text-align: center;
-      animation: slideUp 0.4s ease-out;
+      animation: fadeIn 0.4s ease-out;
     }
 
-    @keyframes slideUp {
+    @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
@@ -181,33 +234,36 @@
       font-size: 0.75rem;
       color: #a09070;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       margin-bottom: 5px;
     }
 
     .result-card .code-text {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 900;
       color: #FFD700;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       margin: 10px 0;
       font-family: monospace;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
     }
 
     .btn-copy {
       background: transparent;
-      border: none;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
       color: #FFD700;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      margin: 0 auto;
+      transition: 0.3s;
+    }
+    
+    .btn-copy:hover {
+        background: rgba(255, 215, 0, 0.1);
     }
 
-    /* Footer Links */
+    /* Footer */
     .footer-links {
       display: flex;
       justify-content: center;
@@ -218,8 +274,7 @@
     }
 
     .footer-links a {
-      color: #666;
-      text-decoration: none;
+      color: #555;
       font-size: 1.2rem;
       transition: 0.3s;
     }
@@ -232,12 +287,12 @@
     .copyright {
       text-align: center;
       font-size: 0.65rem;
-      color: #444;
+      color: #333;
       margin-top: 20px;
       letter-spacing: 1px;
     }
-    
-    /* Toast Notification */
+
+    /* Toast */
     .toast {
       position: fixed;
       bottom: -50px;
@@ -246,25 +301,27 @@
       background: #FFD700;
       color: #000;
       padding: 10px 20px;
-      border-radius: 30px;
+      border-radius: 5px;
       font-weight: bold;
       font-size: 0.8rem;
       transition: 0.3s;
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      z-index: 100;
     }
     .toast.show { bottom: 30px; }
   </style>
 </head>
 <body>
 
+  <div class="bg-glow"></div>
+
   <div class="container">
     
     <div class="header">
-      <div class="avatar">
+      <div class="avatar-spin">
         <img src="https://files.catbox.moe/aktbgo.jpg" alt="RAHMANI-XMD">
       </div>
       <h1>RAHMANI-XMD</h1>
-      <div class="subtitle">Coded by Qartde</div>
+      <p>SECURE PAIRING SYSTEM</p>
     </div>
 
     <div class="input-group">
@@ -288,14 +345,14 @@
         <input type="tel" id="number" placeholder="Enter WhatsApp Number" autocomplete="off">
       </div>
 
-      <button id="submit" class="btn-generate">
-        <i class="fas fa-bolt"></i> Generate Pair Code
+      <button id="submit" class="submit-btn">
+        <i class="fas fa-bolt"></i> Generate Code
       </button>
     </div>
 
-    <!-- Kadi ya Code (Imefichwa mwanzo) -->
+    <!-- Result Card -->
     <div class="result-card" id="resultCard">
-      <p>Your Pair Code</p>
+      <p>Pairing Code</p>
       <div class="code-text" id="codeText">------</div>
       <button class="btn-copy" onclick="copyCode()">
         <i class="fas fa-copy"></i> Tap to copy
@@ -303,13 +360,13 @@
     </div>
 
     <div class="footer-links">
-      <a href="https://whatsapp.com/channel/0029VatokI45EjxufALmY32X" target="_blank" title="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://wa.me/255693629079" target="_blank" title="Contact Owner"><i class="fas fa-user-shield"></i></a>
-      <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank" title="GitHub Repo"><i class="fab fa-github"></i></a>
+      <a href="https://whatsapp.com/channel/0029VatokI45EjxufALmY32X" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://wa.me/255693629079" target="_blank"><i class="fas fa-user-shield"></i></a>
+      <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank"><i class="fab fa-github"></i></a>
     </div>
 
     <div class="copyright">
-      SECURE SYSTEM • 2026
+      © 2026 RAHMANI-XMD
     </div>
   </div>
 
@@ -325,7 +382,6 @@
     const toast = document.getElementById("toast");
     let currentCode = "";
 
-    // Copy Function
     function copyCode() {
       if (!currentCode) return;
       navigator.clipboard.writeText(currentCode).then(() => {
@@ -334,7 +390,6 @@
       });
     }
 
-    // Generate Code Function
     submitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       
@@ -346,11 +401,10 @@
       const countryCode = countrySelect.value;
       const fullNumber = countryCode + num;
 
-      // Change button state
       const originalText = submitBtn.innerHTML;
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
       submitBtn.disabled = true;
-      resultCard.style.display = "none"; // Ficha kadi ya zamani
+      resultCard.style.display = "none";
 
       try {
         const { data } = await axios(`/code?number=${fullNumber}`);
@@ -358,14 +412,13 @@
         if (data.code && !data.code.includes("Unavailable")) {
           currentCode = data.code;
           codeText.innerText = data.code;
-          resultCard.style.display = "block"; // Onyesha kadi mpya
+          resultCard.style.display = "block";
         } else {
           alert("Failed to get code. Server unavailable.");
         }
       } catch (err) {
         alert("Error connecting to server. Try again.");
       } finally {
-        // Rudisha button kwenye hali yake ya kawaida
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
       }
