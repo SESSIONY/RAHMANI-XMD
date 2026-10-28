@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>⚡ RAHMANI-XMD | Secure Pairing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ RAHMANI-XMD | Official Hub</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -19,40 +19,38 @@
       align-items: center;
       min-height: 100vh;
       background-color: #050505;
-      /* Mwanga hafifu wa Dhahabu chini ya ukurasa */
-      background-image: radial-gradient(circle at 50% 100%, rgba(255, 215, 0, 0.15) 0%, transparent 60%);
+      background-image: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 60%);
       color: #ffffff;
       padding: 20px;
     }
 
-    /* Main Container */
     .container {
       position: relative;
       width: 100%;
       max-width: 420px;
-      padding: 35px 25px;
+      padding: 40px 25px;
       border-radius: 24px;
-      background: linear-gradient(145deg, rgba(25, 25, 25, 0.9), rgba(10, 10, 10, 0.9));
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 
-                  0 0 0 1px rgba(255, 215, 0, 0.2) inset,
-                  0 0 30px rgba(255, 215, 0, 0.05);
+      background: linear-gradient(145deg, rgba(25, 25, 25, 0.95), rgba(10, 10, 10, 0.95));
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.15) inset;
       backdrop-filter: blur(10px);
-    }
-
-    /* Header Section */
-    .header {
       text-align: center;
-      margin-bottom: 30px;
     }
 
     .avatar {
       width: 120px;
       height: 120px;
-      margin: 0 auto 15px;
+      margin: 0 auto 20px;
       border-radius: 50%;
       padding: 4px;
       background: linear-gradient(135deg, #FFD700, #B8860B);
       box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
     }
 
     .avatar img {
@@ -62,307 +60,141 @@
       object-fit: cover;
     }
 
-    .header h1 {
+    h1 {
       font-size: 1.8rem;
       font-weight: 800;
       background: linear-gradient(90deg, #FFD700, #FFA500);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: 1px;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
-    .header .subtitle {
+    .subtitle {
       display: inline-block;
       font-size: 0.8rem;
       color: #a09070;
       background: rgba(255, 215, 0, 0.1);
-      padding: 5px 15px;
+      padding: 6px 16px;
       border-radius: 20px;
       border: 1px solid rgba(255, 215, 0, 0.2);
+      margin-bottom: 30px;
     }
 
-    /* Input Fields */
-    .input-group {
+    .menu {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      margin-bottom: 25px;
     }
 
-    .input-box {
+    .menu-btn {
       display: flex;
       align-items: center;
+      text-decoration: none;
+      padding: 16px 20px;
+      border-radius: 12px;
       background: rgba(0, 0, 0, 0.6);
-      border-radius: 12px;
       border: 1px solid rgba(255, 215, 0, 0.2);
-      padding: 0 15px;
-      transition: 0.3s;
-    }
-
-    .input-box:focus-within {
-      border-color: #FFD700;
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-    }
-
-    .input-box i {
-      color: #FFD700;
-      font-size: 1.2rem;
-    }
-
-    .input-box select, 
-    .input-box input {
-      width: 100%;
-      padding: 16px 10px;
-      background: transparent;
-      border: none;
       color: #fff;
+      font-weight: 600;
       font-size: 0.95rem;
-      outline: none;
-    }
-
-    .input-box select option {
-      background: #111;
-    }
-
-    /* Generate Button */
-    .btn-generate {
-      width: 100%;
-      padding: 16px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #DAA520, #B8860B);
-      color: #000;
-      font-weight: 800;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
       transition: 0.3s;
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
     }
 
-    .btn-generate:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-      background: linear-gradient(135deg, #FFD700, #DAA520);
-    }
-
-    /* Result Card (Inatokea tu ukisha-pata code) */
-    .result-card {
-      display: none;
-      margin-top: 20px;
-      padding: 20px;
-      background: rgba(255, 215, 0, 0.05);
-      border: 1px dashed rgba(255, 215, 0, 0.5);
-      border-radius: 15px;
+    .menu-btn i {
+      font-size: 1.3rem;
+      color: #FFD700;
+      margin-right: 15px;
+      width: 25px;
       text-align: center;
-      animation: slideUp 0.4s ease-out;
     }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .menu-btn:hover {
+      background: rgba(255, 215, 0, 0.1);
+      border-color: #FFD700;
+      transform: translateX(5px);
     }
 
-    .result-card p {
+    .menu-btn .text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .menu-btn .text span {
       font-size: 0.75rem;
-      color: #a09070;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
+      color: #888;
+      font-weight: 400;
+      margin-top: 2px;
     }
 
-    .result-card .code-text {
-      font-size: 2rem;
-      font-weight: 900;
-      color: #FFD700;
-      letter-spacing: 4px;
-      margin: 10px 0;
-      font-family: monospace;
-    }
-
-    .btn-copy {
-      background: transparent;
-      border: none;
-      color: #FFD700;
-      font-size: 0.8rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      margin: 0 auto;
-    }
-
-    /* Footer */
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
+    .footer {
+      margin-top: 35px;
       padding-top: 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .footer-links a {
-      color: #666;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: 0.3s;
-    }
-
-    .footer-links a:hover {
-      color: #FFD700;
-      transform: translateY(-3px);
-    }
-
-    .copyright {
-      text-align: center;
-      font-size: 0.65rem;
-      color: #444;
-      margin-top: 20px;
+      font-size: 0.7rem;
+      color: #555;
       letter-spacing: 1px;
     }
-    
-    /* Notification */
-    .toast {
-      position: fixed;
-      bottom: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #FFD700;
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 0.8rem;
-      transition: 0.3s;
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-    }
-    .toast.show { bottom: 30px; }
-
   </style>
 </head>
 <body>
 
   <div class="container">
     
-    <div class="header">
-      <div class="avatar">
-        <img src="https://files.catbox.moe/aktbgo.jpg" alt="RAHMANI-XMD">
-      </div>
-      <h1>RAHMANI-XMD</h1>
-      <div class="subtitle">Coded by Qartde</div>
+    <div class="avatar">
+      <img src="https://files.catbox.moe/aktbgo.jpg" alt="RAHMANI-XMD">
+    </div>
+    <h1>RAHMANI-XMD</h1>
+    <div class="subtitle">Official Link Hub</div>
+
+    <div class="menu">
+      
+      <!-- KITUFE CHA PAIR SESSION (Kinapeleka kwenye pair.html) -->
+      <a href="/pair" class="menu-btn">
+        <i class="fas fa-link"></i>
+        <div class="text">
+          Pair Session
+          <span>Link your WhatsApp to the bot</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank" class="menu-btn">
+        <i class="fab fa-github"></i>
+        <div class="text">
+          Bot Repository
+          <span>View source code on GitHub</span>
+        </div>
+      </a>
+
+      <a href="https://dashboard.heroku.com/new?template=https://github.com/Qartde/RAHMANI-XMD" target="_blank" class="menu-btn">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <div class="text">
+          Heroku Deploy
+          <span>Deploy the bot instantly</span>
+        </div>
+      </a>
+
+      <a href="https://whatsapp.com/channel/0029VatokI45EjxufALmY32X" target="_blank" class="menu-btn">
+        <i class="fab fa-whatsapp"></i>
+        <div class="text">
+          WhatsApp Channel
+          <span>Join for updates and support</span>
+        </div>
+      </a>
+
+      <a href="https://wa.me/255693629079" target="_blank" class="menu-btn">
+        <i class="fas fa-user-shield"></i>
+        <div class="text">
+          Contact Owner
+          <span>Chat directly with Qartde</span>
+        </div>
+      </a>
+
     </div>
 
-    <div class="input-group">
-      <div class="input-box">
-        <i class="fas fa-globe"></i>
-        <select id="country">
-          <option value="255" selected>Tanzania (+255)</option>
-          <option value="254">Kenya (+254)</option>
-          <option value="256">Uganda (+256)</option>
-          <option value="250">Rwanda (+250)</option>
-          <option value="243">DRC (+243)</option>
-          <option value="27">South Africa (+27)</option>
-          <option value="234">Nigeria (+234)</option>
-          <option value="44">UK (+44)</option>
-          <option value="1">USA (+1)</option>
-        </select>
-      </div>
-
-      <div class="input-box">
-        <i class="fas fa-phone-alt"></i>
-        <input type="tel" id="number" placeholder="Enter WhatsApp Number" autocomplete="off">
-      </div>
-
-      <button id="submit" class="btn-generate">
-        <i class="fas fa-bolt"></i> Generate Pair Code
-      </button>
-    </div>
-
-    <!-- Result Card (Imefichwa mwanzo) -->
-    <div class="result-card" id="resultCard">
-      <p>Your Pair Code</p>
-      <div class="code-text" id="codeText">------</div>
-      <button class="btn-copy" onclick="copyCode()">
-        <i class="fas fa-copy"></i> Tap to copy
-      </button>
-    </div>
-
-    <div class="footer-links">
-      <a href="https://whatsapp.com/channel/0029VatokI45EjxufALmY32X" target="_blank" title="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://wa.me/255693629079" target="_blank" title="Contact Owner"><i class="fas fa-user-shield"></i></a>
-      <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank" title="GitHub Repo"><i class="fab fa-github"></i></a>
-    </div>
-
-    <div class="copyright">
-      SECURE SYSTEM • 2026
-    </div>
+    <div class="footer">SECURE SYSTEM • POWERED BY RAHMANI-XMD</div>
   </div>
 
-  <div class="toast" id="toast">Code copied!</div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
-  <script>
-    const submitBtn = document.getElementById("submit");
-    const numberInput = document.getElementById("number");
-    const countrySelect = document.getElementById("country");
-    const resultCard = document.getElementById("resultCard");
-    const codeText = document.getElementById("codeText");
-    const toast = document.getElementById("toast");
-    let currentCode = "";
-
-    // Copy Function
-    function copyCode() {
-      if (!currentCode) return;
-      navigator.clipboard.writeText(currentCode).then(() => {
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2000);
-      });
-    }
-
-    // Generate Code Function
-    submitBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      
-      let num = numberInput.value.replace(/\D/g, "");
-      if (!num) {
-        return alert("Please enter a valid phone number!");
-      }
-
-      const countryCode = countrySelect.value;
-      const fullNumber = countryCode + num;
-
-      // Change button state
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
-      submitBtn.disabled = true;
-      resultCard.style.display = "none"; // Ficha kadi ya zamani
-
-      try {
-        const { data } = await axios(`/code?number=${fullNumber}`);
-        
-        if (data.code && !data.code.includes("Unavailable")) {
-          currentCode = data.code;
-          codeText.innerText = data.code;
-          resultCard.style.display = "block"; // Onyesha kadi mpya
-        } else {
-          alert("Failed to get code. Server unavailable.");
-        }
-      } catch (err) {
-        alert("Error connecting to server. Try again.");
-      } finally {
-        // Rudisha button kwenye hali yake ya kawaida
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }
-    });
-  </script>
 </body>
 </html>
