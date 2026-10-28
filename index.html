@@ -3,198 +3,390 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚡ RAHMANI-XMD | Official Hub</title>
+  <title>⚡ RAHMANI-XMD | Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }
 
     body {
       display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
-      background-color: #050505;
-      background-image: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 60%);
+      background-color: #0a0a0a;
       color: #ffffff;
-      padding: 20px;
     }
 
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      padding: 40px 25px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, rgba(25, 25, 25, 0.95), rgba(10, 10, 10, 0.95));
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.15) inset;
-      backdrop-filter: blur(10px);
+    /* ===== SIDEBAR (Upande wa kushoto) ===== */
+    .sidebar {
+      width: 280px;
+      background: #111;
+      border-right: 1px solid rgba(255, 215, 0, 0.15);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .brand img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #FFD700;
+    }
+
+    .brand h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFD700;
+      letter-spacing: 1px;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 15px;
+      border-radius: 8px;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .nav-item i {
+      font-size: 1.1rem;
+      width: 20px;
       text-align: center;
     }
 
-    .avatar {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, #FFD700, #B8860B);
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-      animation: float 3s ease-in-out infinite;
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255, 215, 0, 0.1);
+      color: #FFD700;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
+    .sidebar-footer {
+      font-size: 0.75rem;
+      color: #555;
+      text-align: center;
+      margin-top: auto;
     }
 
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
+    /* ===== MAIN CONTENT (Upande wa kulia) ===== */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 40px;
+      background-image: radial-gradient(circle at 100% 0%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
     }
 
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #FFD700, #FFA500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .top-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .top-header h1 span {
+      color: #FFD700;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 255, 0, 0.1);
+      color: #00ff00;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(0, 255, 0, 0.2);
+    }
+
+    /* ===== GRID SYSTEM ===== */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    /* Kadi za Takwimu */
+    .stat-card {
+      background: #151515;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: #777;
+      text-transform: uppercase;
       letter-spacing: 1px;
+    }
+
+    .stat-card .value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Kadi za Menu (Buttons) */
+    .menu-card {
+      background: #151515;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .menu-card:hover {
+      border-color: #FFD700;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+    }
+
+    .menu-card .icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      background: rgba(255, 215, 0, 0.1);
+      color: #FFD700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .menu-card h3 {
+      font-size: 1.1rem;
       margin-bottom: 8px;
     }
 
-    .subtitle {
-      display: inline-block;
-      font-size: 0.8rem;
-      color: #a09070;
-      background: rgba(255, 215, 0, 0.1);
-      padding: 6px 16px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      margin-bottom: 30px;
-    }
-
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .menu-btn {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      padding: 16px 20px;
-      border-radius: 12px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: 0.3s;
-    }
-
-    .menu-btn i {
-      font-size: 1.3rem;
-      color: #FFD700;
-      margin-right: 15px;
-      width: 25px;
-      text-align: center;
-    }
-
-    .menu-btn:hover {
-      background: rgba(255, 215, 0, 0.1);
-      border-color: #FFD700;
-      transform: translateX(5px);
-    }
-
-    .menu-btn .text {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-
-    .menu-btn .text span {
-      font-size: 0.75rem;
+    .menu-card p {
+      font-size: 0.85rem;
       color: #888;
-      font-weight: 400;
-      margin-top: 2px;
+      margin-bottom: 20px;
+      line-height: 1.5;
     }
 
-    .footer {
-      margin-top: 35px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.7rem;
-      color: #555;
-      letter-spacing: 1px;
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .action-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== RESPONSIVE (Kwa Simu) ===== */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px 20px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+      }
+      .brand { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+      .nav-menu { display: none; /* Ficha menu kwenye simu */ }
+      .sidebar-footer { display: none; }
+      .main-content { margin-left: 0; padding: 20px; }
+      .top-header { flex-direction: column; align-items: flex-start; gap: 15px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="https://files.catbox.moe/aktbgo.jpg" alt="Logo">
+      <h2>RAHMANI</h2>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="/" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+      <a href="/pair" class="nav-item"><i class="fas fa-link"></i> Pair Session</a>
+      <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank" class="nav-item"><i class="fab fa-github"></i> Repository</a>
+      <a href="https://whatsapp.com/channel/0029VatokI45EjxufALmY32X" target="_blank" class="nav-item"><i class="fab fa-whatsapp"></i> Channel</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      © 2026 RAHMANI-XMD
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
     
-    <div class="avatar">
-      <img src="https://files.catbox.moe/aktbgo.jpg" alt="RAHMANI-XMD">
+    <div class="top-header">
+      <h1>Welcome to <span>RAHMANI-XMD</span></h1>
+      <div class="status-badge">
+        <i class="fas fa-circle" style="font-size: 8px;"></i> System Online
+      </div>
     </div>
-    <h1>RAHMANI-XMD</h1>
-    <div class="subtitle">Official Link Hub</div>
 
-    <div class="menu">
+    <!-- Kadi za Takwimu (Stats) -->
+    <div class="grid-container" style="margin-bottom: 30px;">
+      <div class="stat-card">
+        <span class="label">Network</span>
+        <span class="value" id="network-type">Checking...</span>
+      </div>
+      <div class="stat-card">
+        <span class="label">IP Address</span>
+        <span class="value" id="ip-address">Checking...</span>
+      </div>
+      <div class="stat-card">
+        <span class="label">Battery</span>
+        <span class="value" id="battery-level">--%</span>
+      </div>
+    </div>
+
+    <!-- Kadi za Menu (Features) -->
+    <div class="grid-container">
       
-      <!-- KITUFE CHA PAIR SESSION (Kinapeleka kwenye pair.html) -->
-      <a href="/pair" class="menu-btn">
-        <i class="fas fa-link"></i>
-        <div class="text">
-          Pair Session
-          <span>Link your WhatsApp to the bot</span>
+      <!-- Pair Session -->
+      <div class="menu-card">
+        <div>
+          <div class="icon-box"><i class="fas fa-link"></i></div>
+          <h3>Pair Session</h3>
+          <p>Link your WhatsApp number to generate a secure session ID for the bot.</p>
         </div>
-      </a>
+        <a href="/pair" class="action-link">Start Pairing <i class="fas fa-arrow-right"></i></a>
+      </div>
 
-      <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank" class="menu-btn">
-        <i class="fab fa-github"></i>
-        <div class="text">
-          Bot Repository
-          <span>View source code on GitHub</span>
+      <!-- Repo -->
+      <div class="menu-card">
+        <div>
+          <div class="icon-box"><i class="fab fa-github"></i></div>
+          <h3>Source Code</h3>
+          <p>View the official repository, contribute, or fork the project on GitHub.</p>
         </div>
-      </a>
+        <a href="https://github.com/Qartde/RAHMANI-XMD" target="_blank" class="action-link">View Repo <i class="fas fa-external-link-alt"></i></a>
+      </div>
 
-      <a href="https://dashboard.heroku.com/new?template=https://github.com/Qartde/RAHMANI-XMD" target="_blank" class="menu-btn">
-        <i class="fas fa-cloud-upload-alt"></i>
-        <div class="text">
-          Heroku Deploy
-          <span>Deploy the bot instantly</span>
+      <!-- Heroku Deploy -->
+      <div class="menu-card">
+        <div>
+          <div class="icon-box"><i class="fas fa-cloud-upload-alt"></i></div>
+          <h3>Deploy Bot</h3>
+          <p>Deploy your own instance of RAHMANI-XMD directly to Heroku with one click.</p>
         </div>
-      </a>
+        <a href="https://dashboard.heroku.com/new?template=https://github.com/Qartde/RAHMANI-XMD" target="_blank" class="action-link">Deploy Now <i class="fas fa-external-link-alt"></i></a>
+      </div>
 
-      <a href="https://whatsapp.com/channel/0029VatokI45EjxufALmY32X" target="_blank" class="menu-btn">
-        <i class="fab fa-whatsapp"></i>
-        <div class="text">
-          WhatsApp Channel
-          <span>Join for updates and support</span>
+      <!-- Contact Owner -->
+      <div class="menu-card">
+        <div>
+          <div class="icon-box"><i class="fas fa-user-shield"></i></div>
+          <h3>Owner Contact</h3>
+          <p>Need help? Chat directly with the developer and owner of the bot.</p>
         </div>
-      </a>
-
-      <a href="https://wa.me/255693629079" target="_blank" class="menu-btn">
-        <i class="fas fa-user-shield"></i>
-        <div class="text">
-          Contact Owner
-          <span>Chat directly with Qartde</span>
-        </div>
-      </a>
+        <a href="https://wa.me/255693629079" target="_blank" class="action-link">Contact Now <i class="fas fa-external-link-alt"></i></a>
+      </div>
 
     </div>
 
-    <div class="footer">SECURE SYSTEM • POWERED BY RAHMANI-XMD</div>
-  </div>
+  </main>
+
+  <script>
+    (function() {
+      // Battery (Imewekwa kama %)
+      function updateBattery() {
+        const el = document.getElementById('battery-level');
+        if ('getBattery' in navigator) {
+          navigator.getBattery().then(battery => {
+            const level = Math.round(battery.level * 100);
+            el.textContent = `${level}%`;
+          }).catch(() => { el.textContent = '100%'; });
+        } else {
+          el.textContent = '100%';
+        }
+      }
+
+      // Network
+      function updateNetwork() {
+        const el = document.getElementById('network-type');
+        if ('connection' in navigator) {
+          const conn = navigator.connection;
+          if (conn && conn.effectiveType) {
+            el.textContent = conn.effectiveType.toUpperCase();
+          } else {
+            el.textContent = '5G';
+          }
+          if (conn) {
+            conn.addEventListener('change', () => {
+              el.textContent = conn.effectiveType ? conn.effectiveType.toUpperCase() : '5G';
+            });
+          }
+        } else {
+          el.textContent = '5G';
+        }
+      }
+
+      // IP Address
+      function fetchIP() {
+        const el = document.getElementById('ip-address');
+        fetch('https://api.ipify.org?format=json')
+          .then(res => res.json())
+          .then(data => { el.textContent = data.ip || '127.0.0.1'; })
+          .catch(() => { el.textContent = '10.0.0.1'; });
+      }
+
+      updateBattery();
+      updateNetwork();
+      fetchIP();
+    })();
+  </script>
 
 </body>
 </html>
